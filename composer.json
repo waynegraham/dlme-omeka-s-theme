@@ -1,0 +1,7 @@
+{
+    "name": "dlme/omeke-s-theme",
+    "type": "dlme-omeka-s-theme",
+    "require": {
+        "omeka/omeka-s": "*"
+    }
+}
