@@ -93,7 +93,9 @@ $userBar = $this->userBar();
             <?php if ($footerContent = $this->themeSetting('footer')): ?>
             <?php echo $footerContent; ?>
             <?php else: ?>
+              <div class="partner-heading">
                 <?php echo $this->translate('Powered by the Digital Library of the Middle East'); ?>
+              </div>
             <?php endif; ?>
           </div>
         </footer>

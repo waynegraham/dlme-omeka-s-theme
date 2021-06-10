@@ -1,0 +1,37 @@
+<?php
+$translate = $this->plugin('translate');
+$searchType = $this->siteSetting('search_type', 'sitewide');
+switch ($searchType) {
+    case 'cross-site':
+        $searchAction = $this->url('site/cross-site-search', ['action' => 'results'], true);
+        break;
+    case 'sitewide':
+    default:
+        $searchAction = $this->url('site/resource', ['controller' => 'index', 'action' => 'search'], true);
+}
+$searchValue = $this->escapeHtml($this->params()->fromQuery('fulltext_search', ''));
+?>
+<form class="search-query-form" role="search" aria-label="Search" action="<?php echo $this->escapeHtml($searchAction); ?>" accept-charset="UTF-8" method="get">
+  <label for="search_field" class="sr-only visually-hidden">Search in</label>
+  <div class="input-group">
+    <label for="q" class="sr-only visually-hidden">search for</label>
+      <input type="text" name="q" id="q"
+      placeholder="<?php echo $translate('Search'); ?>" aria-label="<?php echo $translate('Search'); ?>"
+      class="search-q q form-control rounded-0" autocomplete="" data-autocomplete-enabled="false">
+
+    <span class="input-group-append">
+      <button type="submit" class="btn btn-primary search-btn" id="search">
+        <span class="submit-search-text">Search</span>
+        <span class="blacklight-icons blacklight-icon-search" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 24 24" aria-label="Search" role="img">
+            <title>Search</title>
+            <path fill="none" d="M0 0h24v24H0V0z"></path>
+            <path
+              d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z">
+            </path>
+          </svg>
+        </span>
+      </button>
+    </span>
+  </div>
+</form>
