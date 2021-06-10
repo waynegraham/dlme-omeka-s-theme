@@ -72,10 +72,12 @@ $userBar = $this->userBar();
                 <!-- TODO: add .nav-item around li -->
                 <?php
                 //@see https://github.com/omeka/Omeka/blob/master/application/libraries/Zend/View/Helper/Navigation/Menu.php#L902
+                // may need to do this manually as there is not a direct way to decorate <li>
                 echo $site->publicNav()->menu()->renderMenu(null, [
                     'maxDepth' => $this->themeSetting('nav_depth') - 1,
                     'activeClass' => 'active',
-                    'ulClass' => 'navbar-nav mr-auto'
+                    'ulClass' => 'navbar-nav mr-auto',
+                    'addPageClassToLi' => true
                 ]);
                 ?>
 
