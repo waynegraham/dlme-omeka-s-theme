@@ -43,16 +43,22 @@ $userBar = $this->userBar();
         <?php echo $userBar; ?>
 
         <header class="masthead image-masthead" role="banner">
-
-          <!-- TODO: get from theme-settings -->
-          <span class='background-container' style="background-image: url('https://dev.dlmenetwork.org/images/85/132,42,1364,137/1800,180/0/default.jpg')"></span>
+          <?php if ($headerContent = $this->themeSettingAssetUrl('header')): ?>
+            <span class="background-container" style="background-image: url('<?php echo $headerContent; ?>');"></span>
+          <?php else: ?>
+            <!-- <span class='background-container' style="background-image: url('https://dev.dlmenetwork.org/images/85/132,42,1364,137/1800,180/0/default.jpg')"></span> -->
+            <span class='background-container' style="background-image: url('https://placeimg.com/1800/180/any')"></span>
+          <?php endif; ?>
 
           <span class="background-container-gradient"></span>
           <nav class="navbar navbar-expand-md navbar-dark topbar" role="navigation" aria-label="Utilities">
             <div class="container">
               <a href="<?php echo $site->url(); ?>" class="navbar-brand">
-                <!-- TODO get from theme-settings -->
-                <img class="dlme-logo" alt="" role="presentation" src="https://dlmenetwork.org/assets/logo-e42af4f27e9ed7b2f868b533990ae50bebe01bb57663a1d745bb37cbaa271234.png" />
+                <?php if ($logoContent = $this->themeSettingAssetUrl('logo')): ?>
+                  <img class="dlme-logo" alt="dlme-logo" role="presentation" src="<?php echo $logoContent; ?>" />
+                <?php else: ?>
+                  <img class="dlme-logo" alt="dlme-logo" role="presentation" src="https://placeimg.com/50/50/any" />
+                <?php endif; ?>
                 Digital Library of the Middle East
               </a>
               <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#user-util-collapse" aria-controls="user-util-collapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -63,17 +69,17 @@ $userBar = $this->userBar();
 
           <div id="exhibit-navbar" class="exhibit-navbar navbar navbar-light navbar-expand-md" role="navigation" aria-label="Exhibit navigation">
             <div class="container flex-column flex-md-row">
-
-              <ul class="navbar-nav mr-auto">
                 <!-- TODO: add .nav-item around li -->
                 <?php
+                //@see https://github.com/omeka/Omeka/blob/master/application/libraries/Zend/View/Helper/Navigation/Menu.php#L902
                 echo $site->publicNav()->menu()->renderMenu(null, [
-                    'maxDepth' => $this->themeSetting('nav_depth') - 1
+                    'maxDepth' => $this->themeSetting('nav_depth') - 1,
+                    'activeClass' => 'active',
+                    'ulClass' => 'navbar-nav mr-auto'
                 ]);
                 ?>
-              </ul>
+
               <div class="navbar-right navbar-nav exhibit-search-form mt-3 mt-md-0">
-                  <!-- TODO: rewrite this partial for Bootstrap form -->
                   <?php echo $this->partial('common/search-form'); ?>
               </div>
             </div>
