@@ -1,1 +1,20 @@
 @import 'production';
+
+// overrides because some helpers are stupid
+.navbar {
+  li {
+    a {
+      color: rgb(237,237,237);
+      display: block;
+      height: 58px;
+      letter-spacing: 0.75px;
+      padding-bottom: 16px;
+      padding-left: 12px;
+      padding-right: 12px;
+      padding-top: 16px;
+    }
+    &.active {
+      background-color: rgba(255, 255, 255, 0.33);
+    }
+  }
+}

@@ -15,7 +15,7 @@ $searchValue = $this->escapeHtml($this->params()->fromQuery('fulltext_search', '
   <label for="search_field" class="sr-only visually-hidden">Search in</label>
   <div class="input-group">
     <label for="q" class="sr-only visually-hidden">search for</label>
-      <input type="text" name="q" id="q"
+      <input type="text" name="fulltext_search" id="q"
       placeholder="<?php echo $translate('Search'); ?>" aria-label="<?php echo $translate('Search'); ?>"
       class="search-q q form-control rounded-0" autocomplete="" data-autocomplete-enabled="false">
 
