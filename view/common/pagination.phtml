@@ -1,0 +1,37 @@
+<?php
+$translate = $this->plugin('translate');
+?>
+
+<!-- view/common/pagination.phtml -->
+<div class="container">
+<?php if ($totalCount): ?>
+  <nav class="pagination nav">
+    <div class="page-links">
+      <?php if ($currentPage != 1): ?>
+          <?php echo $this->hyperlink('« Previous', $previousPageUrl, ['class' => '', 'title' => $translate('Previous'), 'aria-label' => $translate('Previous'), 'rel' => 'previous']); ?>
+      <?php else: ?>
+        « Previous
+            <a class="" disabled rel="previous" href="#" tabindex="-1" aria-disabled="true"></a>
+      <?php endif; ?>
+      |
+      <?php
+        $from = $offset + 1;
+        $to = ($currentPage < $pageCount) ? $offset + $perPage : $totalCount;
+      ?>
+        <span class="page-entries">
+          <?php echo sprintf($translate('%1$s–%2$s of %3$s'), $from, $to, $totalCount); ?>
+        </span>
+        |
+        <?php if ($currentPage < $pageCount): ?>
+            <?php echo $this->hyperlink('Next »', $nextPageUrl, ['class' => '', 'title' => $translate('Next'), 'aria-label' => $translate('Next'), 'rel' => 'next']); ?>
+        <?php else: ?>
+          Next »
+
+        <?php endif; ?>
+    </div>
+  </nav>
+
+<?php else: ?>
+    <?php echo $translate('0 results'); ?>
+<?php endif; ?>
+  </div>

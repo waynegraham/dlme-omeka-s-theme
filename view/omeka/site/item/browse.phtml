@@ -44,9 +44,19 @@ $sortHeadings = [
 <?php echo $this->searchFilters(); ?>
 
 <div class="browse-controls">
-    <?php echo $this->pagination(); ?>
-    <?php echo $this->hyperlink($translate('Advanced search'), $this->url('site/resource', ['controller' => 'item', 'action' => 'search'], ['query' => $query], true), ['class' => 'advanced-search']); ?>
-    <?php echo $this->sortSelector($sortHeadings); ?>
+  <h2 class="text-danger">TODO: fix browse controls for BS 4.0.1</h2>
+  <div class="row">
+    <div class="col-md-3 col-sm-12">
+      <?php echo $this->pagination(); ?>
+    </div>
+    <div class="col-md-3 col-sm-12">
+      <?php echo $this->hyperlink($translate('Advanced search'), $this->url('site/resource', ['controller' => 'item', 'action' => 'search'], ['query' => $query], true), ['class' => 'advanced-search']); ?>
+    </div>
+    <div class="col-md-6 col-sm-12 float-right">
+      <?php echo $this->sortSelector($sortHeadings); ?>
+    </div>
+  </div>
+
 </div>
 
 <?php $this->trigger('view.browse.before'); ?>
@@ -82,28 +92,6 @@ $sortHeadings = [
 <?php endforeach; ?>
 </div>
 
-
-
-
-<ul class="resource-list">
-<?php
-$headingTerm = $this->siteSetting('browse_heading_property_term');
-$bodyTerm = $this->siteSetting('browse_body_property_term');
-foreach ($items as $item):
-    $heading = $headingTerm ? $item->value($headingTerm, ['default' => $translate('[Untitled]')]) : $item->displayTitle();
-    $body = $bodyTerm ? $item->value($bodyTerm) : $item->displayDescription();
-?>
-    <li class="item resource">
-        <?php if ($itemThumbnail = $this->thumbnail($item, 'medium')): ?>
-        <?php echo $item->linkRaw($itemThumbnail); ?>
-        <?php endif; ?>
-        <h4><?php echo $item->link($heading); ?></h4>
-        <?php if ($body): ?>
-        <div class="description"><?php echo $escape($body); ?></div>
-        <?php endif; ?>
-    </li>
-<?php endforeach; ?>
-</ul>
 <?php echo ($itemSetShow) ? '</div>' : ''; ?>
 <?php $this->trigger('view.browse.after'); ?>
 <?php echo $this->pagination(); ?>
