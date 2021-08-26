@@ -23,13 +23,14 @@ function sass() {
 
 function serve() {
   browserSync.init({
-    server: "./",
-    watch: true
+    // server: "./",
+    watch: true,
+    proxy: "localhost:8888/"
   });
 
-  gulp.watch("asset/scss/*.scss", sass);
-  gulp.watch("*.phtml").on('change', browserSync.reload);
-  gulp.watch("*.php").on('change', browserSync.reload);
+  gulp.watch("**/*.scss", sass);
+  gulp.watch("**/*.phtml").on('change', browserSync.reload);
+  gulp.watch("**/*.php").on('change', browserSync.reload);
 }
 
 gulp.task('sass', sass);
