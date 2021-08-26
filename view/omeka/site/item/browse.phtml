@@ -70,23 +70,23 @@ $sortHeadings = [
       $body = $bodyTerm ? $item->value($bodyTerm) : $item->displayDescription();
   ?>
   <article data-document-id="#" data-document-counter="" itemscope="itemscope" itemtype="http://schema.org/Thing" class="document">
+    <?php if ($itemThumbnail = $this->thumbnail($item, 'medium', ['class' => 'img-thumbnail', 'loading' => 'lazy'])): ?>
+      <div class="document-thumbnail">
+        <?php echo $item->linkRaw($itemThumbnail); ?>
+      </div>
+    <?php endif; ?>
     <header class="documentHeader row">
-      <?php if ($itemThumbnail = $this->thumbnail($item, 'medium')): ?>
-        <div class="document-thumbnail">
-          <?php echo $item->linkRaw($itemThumbnail, null, ['class' => 'img-thumbnail', 'loading' => 'lazy']); ?>
-        </div>
-      <?php endif; ?>
       <h3 class="index_title document-title-heading">
         <?php echo $item->link($heading, null, ["class" => "foo"]); ?>
       </h3>
-      <?php if ($body): ?>
-      <div class="description">
-        <p>
-          <?php echo nl2br($escape($body)); ?>
-        </p>
-      </div>
-      <?php endif; ?>
     </header>
+    <?php if ($body): ?>
+    <div class="description document-metadata row">
+      <p>
+        <?php echo nl2br($escape($body)); ?>
+      </p>
+    </div>
+    <?php endif; ?>
   </article>
 
 <?php endforeach; ?>

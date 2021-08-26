@@ -3,7 +3,7 @@ $translate = $this->plugin('translate');
 $escape = $this->plugin('escapeHtml');
 ?>
 <!-- view/common/block-layout/browse-preview.html -->
-<div class="preview-block">
+
 
 <?php if ($this->heading): ?>
 <h2><?php echo $this->heading; ?></h2>
@@ -11,8 +11,8 @@ $escape = $this->plugin('escapeHtml');
 
 <div id="documents" class="documents-list mb-3">
   <?php
-  $headingTerm = $this->siteSetting('browse_heading_property_term');
-  $bodyTerm = $this->siteSetting('browse_body_property_term');
+    $headingTerm = $this->siteSetting('browse_heading_property_term');
+    $bodyTerm = $this->siteSetting('browse_body_property_term');
   ?>
   <?php foreach ($this->resources as $resource):?>
     <?php
@@ -20,16 +20,23 @@ $escape = $this->plugin('escapeHtml');
       $body = $bodyTerm ? $resource->value($bodyTerm) : $resource->displayDescription();
      ?>
     <article data-document-id="#" data-document-counter="" itemscope="itemscope" itemtype="http://schema.org/Thing" class="document">
-      <?php if ($itemThumbnail = $this->thumbnail($resource, 'medium')): ?>
+      <?php if ($itemThumbnail = $this->thumbnail($resource, 'medium', ['class' => 'img-thumbnail', 'loading' => 'lazy'])): ?>
         <div class="document-thumbnail">
-          <?php echo $resource->linkRaw($itemThumbnail, null, ['class' => 'img-thumbnail', 'loading' => 'lazy']); ?>
+          <?php echo $resource->linkRaw($itemThumbnail); ?>
         </div>
       <?php endif; ?>
-      <h3 class="index_title document-title-heading">
-        <?php echo $resource->link($heading); ?>
-      </h3>
+      <header class="documentHeader row">
+        <h3 class="index_title document-title-heading">
+          <?php echo $resource->link($heading); ?>
+        </h3>
+      </header>
+
       <?php if ($body): ?>
-      <div class="description"><?php echo $escape($body); ?></div>
+      <div class="description document-preview row">
+        <p>
+          <?php echo nl2br($escape($body)); ?>
+        </p>
+      </div>
       <?php endif; ?>
     </article>
 
@@ -43,5 +50,3 @@ if ($this->linkText):
     ), ['class' => 'btn btn-primary']);
 endif;
 ?>
-
-</div>
