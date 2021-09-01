@@ -1,0 +1,31 @@
+@import 'mixins';
+
+$danger: #dc3545;
+
+
+.field {
+  margin: 30px;
+  display: flex;
+  flex-wrap: wrap;
+
+  .field-meta {
+    width: 30%;
+    padding: 7.5px 1.69492% 0 0;
+  }
+
+  .inputs {
+    width: 70%;
+    padding-left: 1.69492%;
+
+    input, textarea {
+      width: 100%;
+      font-size: 24px;
+    }
+  }
+}
+
+.field.required .field-meta::after {
+  content: "*";
+  color: $danger;
+  font-size: 24px;
+}
