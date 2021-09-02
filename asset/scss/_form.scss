@@ -1,31 +1,83 @@
 @import 'mixins';
-
+@import 'variables';
 $danger: #dc3545;
 
-
 .field {
-  margin: 30px;
+  @include field-row;
   display: flex;
   flex-wrap: wrap;
 
+  &:first-child {
+    border-color: transparent;
+  }
+
   .field-meta {
     width: 30%;
-    padding: 7.5px 1.69492% 0 0;
+    padding-right: 1.5 * $spacing-large;
   }
 
   .inputs {
     width: 70%;
     padding-left: 1.69492%;
 
-    input, textarea {
+    input[type="text"],
+    textarea {
       width: 100%;
       font-size: 24px;
     }
   }
 }
 
-.field.required .field-meta::after {
-  content: "*";
-  color: $danger;
-  font-size: 24px;
+input[type="submit"] {
+  font-weight: 400;
+  border: 1px solid transparent;
+  padding: 0.375rem 0.75rem;
+  font-size: 1.25rem;
+  line-height: 1.33;
+  border-radius: 0.25rem;
+  transition: all 0.15 ease-in-out;
+
+  color: #fff;
+  background-color: #0f2450;
+  border-color: #0f2450;
+
+  &:hover {
+    color: #fff;
+    background-color: #091630;
+    border-color: #071125;
+  }
+}
+
+.required .field-meta {
+  position: relative;
+  padding-right: (1.5 * $spacing-large);
+
+  &:after {
+    content: "*";
+    color: $danger;
+    font-size: 0.75 * $base-font-size;
+    position: absolute;
+    right: $spacing-medium;
+    top: $spacing-small;
+  }
+}
+
+label {
+  input {
+    margin-right: 0.5em;
+  }
+
+  input[type="checkbox"] {
+    display: inline-block;
+    width: auto;
+  }
+
+  .required:after {
+    content: "*";
+    color: $danger;
+    font-size: 0.75 * $base-font-size;
+    position: absolute;
+    right: $spacing-medium;
+    top: $spacing-small;
+  }
 }
