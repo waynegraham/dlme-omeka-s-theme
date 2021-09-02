@@ -55,7 +55,7 @@ input[type="submit"] {
   &:after {
     content: "*";
     color: $danger;
-    font-size: 0.75 * $base-font-size;
+    font-size: 2 * $base-font-size;
     position: absolute;
     right: $spacing-medium;
     top: $spacing-small;
@@ -75,7 +75,7 @@ label {
   .required:after {
     content: "*";
     color: $danger;
-    font-size: 0.75 * $base-font-size;
+    font-size: 2 * $base-font-size;
     position: absolute;
     right: $spacing-medium;
     top: $spacing-small;
